@@ -1,25 +1,3 @@
-Data Strucutures
-
-- primitive
-    - int
-    - char
-    - boolean
-
-- non-primitive
-    - linear
-        - static
-            - array
-        - dynamic
-            - Linked lists ✅
-            - stack ✅
-            - queues ✅
-    - non-linear
-        - tree ✅
-        - graph ✅
-
-
-In this course, We focus on data strucutures and particularly on linked lists, stack, queue, tree, graph. 
-
 Linked lists
 
 `Node { Data, address of next node}`

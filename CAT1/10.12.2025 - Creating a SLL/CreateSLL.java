@@ -1,6 +1,16 @@
 
 import java.util.Scanner;
 
+class SLNode {
+
+    int data;
+    SLNode next;
+
+    public SLNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 public class CreateSLL {
 
     static void printLIST(SLNode head){
