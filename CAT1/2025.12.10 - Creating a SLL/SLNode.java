@@ -1,4 +1,3 @@
-
 public class SLNode {
 
     int data;
