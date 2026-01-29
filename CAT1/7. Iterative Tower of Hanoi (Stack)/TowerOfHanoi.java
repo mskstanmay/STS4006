@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.Stack;
 
-@SuppressWarnings("ConvertToTryWithResources")
 class TowerOfHanoi {
     static Stack<Integer> sourceStack = new Stack<>();
     static Stack<Integer> auxillaryStack = new Stack<>();
@@ -53,9 +52,15 @@ class TowerOfHanoi {
         int moves = (int) (Math.pow(2, n) - 1);
         for (int i = 1; i <= moves; i++) {
             switch (i % 3) {
-                case 1 -> change(sourceStack, destinationStack, s, d);
-                case 2 -> change(sourceStack, auxillaryStack, s, a);
-                case 0 -> change(auxillaryStack, destinationStack, a, d);
+                case 1:
+                    change(sourceStack, destinationStack, s, d);
+                    break;
+                case 2:
+                    change(sourceStack, auxillaryStack, s, a);
+                    break;
+                case 0:
+                    change(auxillaryStack, destinationStack, a, d);
+                    break;
             }
         }
     }
