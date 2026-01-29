@@ -1,50 +1,48 @@
-public class minStack {
-    private Node top;
-    private Node minTop;
+import java.util.Stack;
 
-    private class Node {
-        int value;
-        Node next;
+class MinStack {
+    Stack<Integer> stack; // Stack to store elements
+    Stack<Integer> minStack; // Stack to track minimum elements
 
-        Node(int value) {
-            this.value = value;
-            this.next = null;
+    public MinStack() {
+        stack = new Stack<>();
+        minStack = new Stack<>();
+    }
+
+    public void push(int element) {
+        stack.push(element); // Push the element onto the main stack
+        // Update the minimum stack
+        if (minStack.isEmpty() || element <= minStack.peek()) {
+            minStack.push(element); // Push the element onto the minimum stack
         }
-    }
-
-    public minStack() {
-        this.top = null;
-        this.minTop = null;
-    }
-
-    public void push(int x) {
-        Node newNode = new Node(x);
-        newNode.next = top;
-        top = newNode;
-
-        if (minTop == null || x <= minTop.value) {
-            Node newMinNode = new Node(x);
-            newMinNode.next = minTop;
-            minTop = newMinNode;
-        }
-    }
-
-    public void pop() {
-        if (top == null) return;
-
-        if (top.value == minTop.value) {
-            minTop = minTop.next;
-        }
-        top = top.next;
-    }
-
-    public int top() {
-        if (top == null) throw new IllegalStateException("Stack is empty");
-        return top.value;
     }
 
     public int getMin() {
-        if (minTop == null) throw new IllegalStateException("Stack is empty");
-        return minTop.value;
-    } 
+        if (!minStack.isEmpty()) {
+            return minStack.peek(); // Return the minimum element from the minimum stack
+        }
+        // Stack is empty, return -1 or throw an exception as desired
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        MinStack stack = new MinStack();
+        // Push some elements onto the stack
+        stack.push(5);
+        stack.push(2);
+        stack.push(7);
+        stack.push(1);
+
+        // Retrieve and print the minimum element
+        int minElement = stack.getMin();
+        System.out.println("Minimum Element: " + minElement); // Output: Minimum Element: 1
+        // Pop an element from the stack
+        stack.pop();
+        // Retrieve and print the top element
+        int topElement = stack.top();
+        System.out.println("Top Element: " + topElement); // Output: Top Element: 7
+        // After pop
+        int newMinElement = stack.getMin();
+        System.out.println("After Pop New Minimum Element: " + newMinElement);
+    }
 }
