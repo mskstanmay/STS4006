@@ -48,7 +48,8 @@ class TowerOfHanoi {
             char temp = a;
             a = d;
             d = temp;
-        }
+        } 
+        // Swap A and D for even number of disks
         int moves = (int) (Math.pow(2, n) - 1);
         for (int i = 1; i <= moves; i++) {
             switch (i % 3) {
