@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Node {
     int val;
     Node left;
@@ -42,16 +44,34 @@ public class RecoverBST {
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter level-order traversal values separated by spaces (-1 for null):");
+        String[] input = scanner.nextLine().trim().split("\\s+");
 
-        Node root = new Node(3);
-        root.left = new Node(1);
-        root.right = new Node(4);
-        root.right.left = new Node(2);
+        List<Integer> values = new ArrayList<>();
+        for (String token : input) {
+            if (token.equals("-1")) {
+                values.add(null);
+            } else {
+                values.add(Integer.parseInt(token));
+            }
+        }
+
+        Node root = buildTree(values);
+
+        if (root == null) {
+            System.out.println("Tree is empty or invalid input.");
+            scanner.close();
+            return;
+        }
+
         RecoverBST solution = new RecoverBST();
         solution.recoverTree(root);
-        // Print the corrected BST
+
         System.out.println("Inorder Traversal of Recovered BST:");
         printInorder(root);
+        System.out.println();
+        scanner.close();
     }
 
     private static void printInorder(Node node) {
@@ -60,5 +80,36 @@ public class RecoverBST {
         printInorder(node.left);
         System.out.print(node.val + " ");
         printInorder(node.right);
+    }
+
+    public static Node buildTree(List<Integer> values) {
+        if (values == null || values.isEmpty() || values.get(0) == null) {
+            return null;
+        }
+
+        Node root = new Node(values.get(0));
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        int i = 1;
+
+        while (!queue.isEmpty() && i < values.size()) {
+            Node current = queue.poll();
+
+            Integer leftVal = values.get(i++);
+            if (leftVal != null) {
+                current.left = new Node(leftVal);
+                queue.offer(current.left);
+            }
+
+            if (i < values.size()) {
+                Integer rightVal = values.get(i++);
+                if (rightVal != null) {
+                    current.right = new Node(rightVal);
+                    queue.offer(current.right);
+                }
+            }
+        }
+
+        return root;
     }
 }
