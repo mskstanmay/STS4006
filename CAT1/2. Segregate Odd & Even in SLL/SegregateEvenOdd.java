@@ -22,6 +22,9 @@ class LinkedList {
             current = current.next;
         }
         current.next = newNode;
+        /*
+         * This adds a new node at the end of the SLL
+         */
     }
 
     public void segregateEvenOdd() {
